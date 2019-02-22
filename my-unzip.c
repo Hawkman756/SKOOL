@@ -10,7 +10,7 @@ char string[100];
 char append[100];
 int a = 0;
 int c = 0;
-int v = 0;
+int v = 1;
 
 while(true){
 if(feof(fpoint))
@@ -19,20 +19,15 @@ break;
 string[a] = fgetc(fpoint);
 a++;
 }
-for(a = 0; string[a]!= '\0'; a++){
-  if(string[a] == string[a+]){
-    c++;
-  }
-  else{
-       c++;
-       append[v] =(char) c;
-       append[v+1] = string[a];
-       c = 0;
-  }
+for(a = 0; string[a]!= '\0'; a+=2){
+ for(c = 0; c < (int)string[a]; c++){
+  append[c] = string[v];
+ }
+ v+=2;
 }
 
-fp = fopen("testzippy.z", "w");
-fwrite(append, 5, sizeof(append), fp);
+fp = fopen("unzipped.txt", "w");
+fwrite(append, 5, a, fp);
 fclose(fpoint);
 fclose(fp);
 
